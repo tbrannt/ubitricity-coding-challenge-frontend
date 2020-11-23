@@ -1,34 +1,46 @@
 <template>
   <div class="container">
     <div>
-      <Logo />
-      <h1 class="title">
-        ubitricity-coding-challenge-frontend
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+      <div>
+        <h1 class="title">Carpark Ubi Charge Management</h1>
       </div>
+      <div class="charging-states">
+        <p class="subtitle">Charging point info:</p>
+        asdf
+          <!-- <a
+            href="https://nuxtjs.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button--green"
+          >
+            Documentation
+          </a>
+          <a
+            href="https://github.com/nuxt/nuxt.js"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button--grey"
+          >
+            GitHub
+          </a> -->
+        </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'Overview',
+
+  async asyncData ({ $axios, error }) {
+    try {
+      const { data } = await $axios.get('charge-connections')
+      return { chargeConnectionsResponse: data }
+    } catch ({ response }) {
+      error({ statusCode: response.data.status, message: response.data.error })
+    }
+  }
+}
 </script>
 
 <style>
@@ -54,20 +66,20 @@ export default {}
     sans-serif;
   display: block;
   font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
+  font-size: 40px;
+  color: #355e4b;
   letter-spacing: 1px;
 }
 
 .subtitle {
   font-weight: 300;
-  font-size: 42px;
+  font-size: 20px;
   color: #526488;
   word-spacing: 5px;
   padding-bottom: 15px;
 }
 
-.links {
+.charging-states {
   padding-top: 15px;
 }
 </style>

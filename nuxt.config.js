@@ -37,8 +37,19 @@ export default {
     '@nuxtjs/axios'
   ],
 
-  // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  /*
+  ** Axios module configuration
+  ** See https://axios.nuxtjs.org/options
+  */
+  axios: {
+    proxy: true,
+    proxyHeaders: true,
+    prefix: '/api/v1/',
+    progress: false
+  },
+  proxy: {
+    '/api/v1/': 'http://localhost:8080'
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
